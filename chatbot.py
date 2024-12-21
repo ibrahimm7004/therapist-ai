@@ -1,7 +1,12 @@
 from huggingface_hub import InferenceClient
+import os
 
-# Initialize the client with your API key
-client = InferenceClient(api_key="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")
+api_key = os.getenv("HF_API_KEY")
+
+if not api_key:
+    raise ValueError("HF_API_KEY environment variable not set.")
+
+client = InferenceClient(api_key=api_key)
 
 # Initialize chat history with a predefined context
 chat_history = [
@@ -39,7 +44,8 @@ def give_analysis(chat_history, emotion_list):
         if not chat_history:
             chat_history = [
                 {"role": "system", "content": "You are a helpful therapy bot."},
-                {"role": "assistant", "content": "Hello, I'm here to help you. How are you feeling today?"}
+                {"role": "assistant",
+                    "content": "Hello, I'm here to help you. How are you feeling today?"}
             ]
 
         if not emotion_list:
