@@ -5,3 +5,4 @@ huggingface_hub==0.24.2
 plotly==5.14.1
 python-dotenv==1.0.1
 Requests==2.32.3
+gunicorn==23.0.0
